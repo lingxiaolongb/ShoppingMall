@@ -1,0 +1,247 @@
+.cancel:hover{
+	text-decoration: none;
+}
+
+html,body{
+    height: 100%;
+
+}
+
+.j_cart{
+	width: 95%;
+	height: auto;
+	border: #E8E8E8 1px solid;
+	min-width: 1180px;
+	border-bottom: none;
+	
+}
+
+.j_cart .cart_head{
+	height: 50px;
+	margin-bottom: 10px;
+	background-color: #E8E8E8;
+}
+
+.j_cart .cart_head .explain{
+	list-style: none;
+	vertical-align: middle;
+	
+}
+
+input[type="checkbox"]{
+	
+	box-sizing: border-box;
+	width: 15px;
+	height: 15px;
+	top: 3px;
+	position: relative;
+	margin-left: 10px;
+}
+
+.cart_head .explain li:first-child{
+	width: 30px;
+}
+
+.cart_head .explain li:nth-child(4){
+	 padding: 10px 90px;
+}
+
+.cart_head .explain li{
+	float: left;
+	width: 160px;
+	line-height: 50px;
+	
+}
+
+.j_cart .cart_con{
+	height: auto;	
+}
+
+.j_cart .cart_con .item{
+	height: 80px;
+	margin: 15px 0 15px;
+	background-color: #fff4e8;
+
+	
+}
+
+.item .left{
+	float: left;
+}
+.item .left .top{
+	position: relative;
+	top: -20px;
+}
+.item .left  img{
+	width: 80px;
+	height: 80px;
+}
+
+.item .left .desc{
+	width: 210px;
+	font-size: 12px;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.item .right{
+	float: right;
+	margin-top: 20px;
+	width:400px;
+	position: relative;
+}
+
+.item .right  a{
+	display: inline-block;
+	text-decoration: none;
+	
+}
+.item .right .price{
+	
+	display:inline-block;
+	width: 120px ;
+	text-align: left;
+	position: absolute;
+	right: 550px;
+	top: 10px;
+	
+}
+
+ .oper{
+	width: 20px;
+	height: 20px;
+	background-color: white;
+	text-align: center;
+	border: #cacbcb 1px solid;
+	cursor: pointer;
+	user-select: none;
+	
+}
+
+.item .right  .tip{
+	font-size: 12px;
+	width: 90px ;
+	text-align: center;
+	color: red;
+	padding-top: 5px;
+	display: none;
+}
+
+.item .right .number{
+	width: 180px;
+	position: absolute;
+	right: 340px;
+	top: 10px;
+}
+.right .number .operd{
+	border-right: none;
+	
+}
+
+
+.right .number .num{
+	width: 50px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	border: #cacbcb 1px solid;
+
+}
+
+.right .number .operi{
+	border-left: none;
+}
+
+.item .right .all_price{
+	display:inline-block;
+	width: 120px ;
+	text-align: left;
+	position: absolute;
+	right: 225px;
+	top: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	color: red;
+}
+
+.item .right .del{
+	display:inline-block;
+	position: absolute;
+	right: 145px;
+	top: 10px;
+}
+
+.j_cart .cart_bottom{
+	height: 50px;
+	background-color: #ffaa7f;
+	margin-top: 10px;
+}
+
+.j_cart .cart_bottom .left{
+	line-height: 50px;
+	float: left;
+}
+.cart_bottom .left .del{
+	width: 150px;
+	display: inline-block;
+	text-align: center;
+	cursor: pointer;
+	text-decoration: none;
+}
+.cart_bottom .left .del:hover{
+
+	color: red;
+	text-decoration:underline;
+}
+
+.j_cart .cart_bottom .right{
+	line-height: 50px;
+	float: right;
+}
+ .cart_bottom .right .settle {
+	list-style: none;
+	
+}
+
+.right .settle li{
+	float: left;
+	width: auto;
+	text-align: center;
+	
+}
+.right .settle li:first-child{
+		margin-right: 15px;
+}
+.settle li .all_num{
+
+	width: 120px;
+	height: 50px;
+	font-size: 20px;
+	text-align: center;
+	color: #f40;
+	line-height: 50px;
+	
+}
+
+.settle li .money{
+	line-height: 50px;
+	width: 120px;
+	height: 50px;
+	font-size: 20px;
+	text-align: center;
+	color: #f40;
+}
+.settle li .buy{
+	line-height: 50px;
+	background-color: #f40;
+	width: 130px;
+	height: 50px;
+	font-size: 20px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 3px;
+	border-style: none;	
+	color: white;
+	cursor: pointer;
+}

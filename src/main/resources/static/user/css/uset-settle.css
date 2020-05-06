@@ -1,0 +1,243 @@
+*, ::before, ::after{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /*去除移动端点击产生的高亮状态*/
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+html,body{
+	height: 100%;
+	
+}
+
+
+.sendTo{
+	width: 1024px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 12px;
+}
+.choosed{
+	border: 1px solid red;
+	font-weight: bold;
+	font-size: 14px;
+	background-color:rgba(255, 200, 151, 127);
+}
+.sendTo .wth{
+	width: 80px;
+	text-align: center;
+	display: inline-block;
+	font-size: 13px;
+	
+}
+.sendTo .location{
+	display: inline-block;
+}
+
+
+ input[name="address"] {
+         position: absolute;
+           clip: rect(0, 0, 0, 0);
+  }
+  
+  input[type="radio"] + label::before {
+      content: "\a0"; /*不换行空格*/
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 18px;
+      width: 1em;
+      height: 1em;
+      margin-right: .4em;
+      border-radius: 50%;
+      border: 1px solid #01cd78;
+      text-indent: .15em;
+      line-height: 1; 
+  }
+  
+ input[type="radio"]:checked + label::before {
+     background-color: #01cd78;
+     background-clip: content-box;
+     padding: .2em;
+	 
+ }
+ 
+ 
+ 
+ .j_order{
+ 	width:auto;
+ 	height: auto;
+ 	min-width: 1024px;
+ 	margin-top: 20px;
+ }
+ 
+ .j_order .order_head{
+ 	background-color: #fff;
+	border-bottom: 2px solid #0ab2ff;
+ 	margin-bottom: 20px;
+ 	overflow: hidden;	
+ 	width: 90%;
+ }
+ 
+ .j_order .order_head .explain{
+ 	list-style: none;
+ 	vertical-align: middle;
+ 	font-size: 13px;
+ }
+ 
+
+ 
+ .order_head .explain li{
+ 	float: left;
+ 	width: 130px;
+ 	line-height: 50px;
+ 	text-align: center;
+ }
+ 
+ .order_head .explain li:first-child{
+ 	width: 360px;
+ }
+ .order_head .explain li:last-child{
+ 	width: 200px;
+ 	text-align: right;
+ }
+ 
+ .j_order .order_con{
+ 	height: auto;
+ 	overflow: hidden;
+	width: 90%;
+	
+ }
+ 
+ .j_order .order_con .item{
+ 	height: auto ;
+	
+ 	margin-bottom: 15px;
+ }
+ .order_con .item .bought_table{
+ 	width: 100%;
+ 	border-spacing: 0;
+ 	color: #3C3C3C;
+ }
+ 
+ .item .bought_table .bought_tr{
+ 		  border-top: 1px solid #0ab2ff;
+ 		  background-color: rgba(10, 178, 255, 0.1);
+ }
+ 
+ 
+ 
+ .item .bought_table .bought_tr:last-child{
+		  border-bottom: 1px solid #0ab2ff;
+ }
+  
+ .pos{
+ 	  position: relative;
+ 	  right: 40px;
+ 	  cursor: pointer;
+ 	  text-decoration: none;
+   }
+   
+ 
+  .bought_table .info .seller{
+ 	overflow: hidden;
+ 	text-overflow: ellipsis;
+ 	white-space: nowrap;
+ 	display: inline-block;
+ 	max-width: 100px;
+ 	text-decoration: none;
+ 	height: 40px;
+ 	line-height: 40px;
+ 	color: #0088CC;
+  }
+  
+  
+   .bought_table .bought_tr td{
+ 	  height: auto;
+ 	 font-size: 13px;
+   }
+   
+   
+
+ 
+   
+  .bought_table .bought_tr .con {
+   	  margin:15px 0 20px 15px;
+ 	   user-select: none;
+   }
+   
+   
+  .con .pic img{
+ 	  width: 80px;
+ 	  height: 80px;
+ 	  vertical-align: top;
+ 	 
+ 	 
+  }
+  
+   .bought_tr .con .jieshao{
+ 	  width: 240px;
+ 	  display: inline-block;
+ 
+   }
+  .bought_tr .con .introduction{
+   	  width: 240px;
+ 	  margin-left: 10px;
+ 	  text-decoration: none;
+ 	  cursor: pointer;
+ 		overflow : hidden;
+ 	   text-overflow: ellipsis;
+ 	   display: -webkit-box;
+ 	   -webkit-line-clamp: 2;      /* 可以显示的行数，超出部分用...表示*/
+ 	   -webkit-box-orient: vertical;
+ 
+   }
+   .introduction:hover, .again:hover,.pos:hover{
+ 	  color: red;
+ 	  opacity: 0.6;
+ 	     text-decoration: none;
+   }
+   .again{
+ 	  text-decoration: none;
+ 	  cursor: pointer;
+ 	   text-decoration: none;
+   }
+ .finish{
+	 background-color: #5555ff;
+	 width: 90%;
+	 height: auto;
+ }
+ 
+ .finish .jiesuan{
+	 height: auto;
+	 float: right;
+	 width: 400px;
+	 border: 1px solid #FF0000;
+	text-align: right
+ }
+ .finish .jiesuan .money{
+	 font-size: 30px;
+	 margin-right: 10px;
+ }
+.jiesuan .money span{
+ 	 color: red;
+ }
+ 
+ .finish .jiesuan .buy{
+ 	line-height: 50px;
+ 	background-color: #f40;
+ 	width: 130px;
+ 	height: 50px;
+ 	font-size: 16px;
+ 	text-align: center;
+ 	text-decoration: none;
+ 	border-radius: 3px;
+ 	border-style: none;	
+ 	color: white;
+ 	cursor: pointer;
+	margin: 10px;
+ }

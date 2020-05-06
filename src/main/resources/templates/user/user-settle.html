@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的京东</title>
+    <link href="/user/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/user/css/styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="/user/css/uset-settle.css" />
+</head><body>
+<div th:replace="common/user-head::head"></div>
+<div th:replace="common/user-left::left"></div>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div style="height: 50px;"></div>
+    <div class="row">
+        <ol class="breadcrumb">
+            <li style="font-weight: bold;">确认收货地址</li>
+        </ol>
+    </div>
+
+    <div th:class="${uga.defaultAddress==1?'sendTo choosed':'sendTo'}"  th:each="uga:${ugas}">
+        <span class="wth"><span th:if="${uga.defaultAddress==1}">寄送至</span></span>
+        <div class="location">
+            <input type="radio" th:checked="${uga.defaultAddress==1?'true':'false'}" name="address" th:id="${uga.ugdId}" />
+            <label th:for="${uga.ugdId}">
+                <span th:text="${uga.location}"></span>
+                <span th:text="${uga.detailedAddress}"></span>&nbsp;&nbsp;(
+                <span th:text="${uga.consignee}"></span>&nbsp;&nbsp;收)&nbsp;&nbsp;
+                <span th:text="${uga.phone}"></span>
+                <span th:if="${uga.defaultAddress==1}">默认地址</span>
+            </label>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li style="font-weight: bold;">确认订单信息</li>
+        </ol>
+    </div>
+    <div style="height: 15px;"></div>
+
+    <div class="j_order">
+        <div class="order_head">
+            <ul class="explain">
+                <li>店铺宝贝</li>
+                <li>单价</li>
+                <li>数量</li>
+                <li>优惠方式</li>
+                <li>实际付款</li>
+            </ul>
+        </div>
+        <div class="order_con">
+            <div class="item" >
+                <table class="bought_table">
+                    <col width="32%">
+                    <col width="12%">
+                    <col width="10%">
+                    <col width="18%">
+                    <col width="18%">
+                    <tbody>
+                    <tr class="bought_tr" th:each="info,iterStat:${session.tempShopInfos}">
+                        <td>
+                            <div class="con">
+                                <a class="pic" href="javascript:void(0)">
+                                    <img th:src="@{'/site/img/'+${prodInfos[iterStat.index].prodPic}}" />
+                                </a>
+                                <div class="jieshao">
+                                    <a class="introduction" th:title="${prodInfos[iterStat.index].describe}" th:text="${prodInfos[iterStat.index].describe}">
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                        <td th:text="'￥ '+${info.price}"></td>
+                        <td th:text="${info.num}"></td>
+                        <td>暂无优惠</td>
+                        <td th:text="${info.price*info.num}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="finish">
+            <div class="jiesuan">
+                <p>实际付款:<label class="money">￥<span th:text="${session.totalPrice}"></span></label></p>
+                <a><button class="buy" id="submit-order" type="button">提交&nbsp;订单</button></a>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+</div>
+<script src="/common/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/user/js/bootstrap.min.js"></script>
+<script src="/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="/user/js/settle.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    ! function($) {
+        $(document).on("click", "ul.nav li.parent > a > span.icon", function() {
+            $(this).find('em:first').toggleClass("glyphicon-minus");
+        });
+        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+    }(window.jQuery);
+
+    $(window).on('resize', function() {
+        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+    });
+    $(window).on('resize', function() {
+        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+    })
+</script>
+</body></html>
+

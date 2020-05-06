@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>我的京东</title>
+
+		<link href="/user/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="/user/css/datepicker3.css" rel="stylesheet" type="text/css">
+		<link href="/user/css/styles.css" rel="stylesheet" type="text/css">
+
+		<link rel="stylesheet" type="text/css" href="/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="/user/css/custom.css" />
+
+	</head>
+
+	<body>
+
+    <div th:replace="common/user-head::head"></div>
+    <div th:replace="common/user-left::left(item='info')"></div>
+
+
+		<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+            <div style="height: 50px;"></div>
+            <div class="row">
+                <ol class="breadcrumb">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+                    <li class="active">个人资料</li>
+                </ol>
+            </div>
+            <!-- 上面那个浮动漏了-->
+            <ul class="layui-nav layui-bg-cyan">
+                <li class="layui-nav-item layui-this "><a class="cancel" href="">个人信息</a></li>
+                <li class="layui-nav-item "><a class="cancel" href="javascript:;">上传照片</a></li>
+
+            </ul>
+
+
+			<div class="con_bor">
+
+
+				<form class="layui-form" action="">
+
+					<div class="layui-form-item">
+                        <label class="con_font layui-form-label">会员名:&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${userInfo.memberName}"></span></label>
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label">姓名 :</label>
+						<div class="layui-input-inline">
+							<input type="text"  id="realName" th:value="${userInfo.realName}" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">性别 :</label>
+						<div class="layui-input-block">
+							<input type="radio" name="gender" th:checked="${userInfo.gender=='1'?'true':'false'}" value=1 title="男" checked>
+							<input type="radio" name="gender" th:checked="${userInfo.gender=='0'?'true':'false'} "value=0 title="女">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">邮箱 :</label>
+						<div class="layui-input-inline">
+							<input type="text" id="email" th:value="${userInfo.email}" name="email" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">手机 :</label>
+						<div class="layui-input-inline">
+							<input type="text" id="phone" th:value="${userInfo.phone}" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn layui-btn-lg layui-btn-normal" id="save" >保存</button>
+                        </div>
+                    </div>
+
+
+
+				</form>
+
+			</div>
+
+
+		</div>
+
+		<script src="/common/js/jquery-3.3.1.min.js"></script>
+        <script src="/layer/layer.js"></script>
+		<script src="/user/js/bootstrap.min.js"></script>
+		<script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			layui.use(['element', 'form'], function() {
+				var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+				var form = layui.form;
+				//监听导航点击
+				element.on('nav(demo)', function(elem) {
+					//console.log(elem)
+					layer.msg(elem.text());
+				});
+			});
+		</script>
+        <script src="/user/js/info.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			! function($) {
+				$(document).on("click", "ul.nav li.parent > a > span.icon", function() {
+					$(this).find('em:first').toggleClass("glyphicon-minus");
+				});
+				$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+			}(window.jQuery);
+
+			$(window).on('resize', function() {
+				if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+			});
+			$(window).on('resize', function() {
+				if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+			});
+		</script>
+	</body>
+
+</html>

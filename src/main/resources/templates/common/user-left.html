@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar" th:fragment="left">
+    <form role="search">
+        <div class="form-group">
+            <p><span class="glyphicon glyphicon-barcode"></span>用户等级:普通</p>
+        </div>
+    </form>
+
+    <ul class="nav menu">
+        <li>
+            <h3 class="glyphicon" style="margin-bottom: 20px ;">&nbsp;账户管理</h3>
+        </li>
+        <li th:class="${item}=='info'? 'active'"><a th:href="@{'/my_jindong/info/'+${session.userId}}"><span class="glyphicon glyphicon-user"></span> 个人资料</a></li>
+        <li th:class="${item}=='balance'?'active' "><a th:href="@{'/my_jindong/balance/'+${session.userId}}"><span class="glyphicon glyphicon-credit-card"></span> 我的余额</a></li>
+        <li th:class="${item}=='cart'?'active' "><a th:href="@{'/my_jindong/cart/'+${session.userId}}"><span class="glyphicon glyphicon-shopping-cart"></span> 我的购物车</a></li>
+        <li th:class="${item}=='order'?'active' "><a th:href="@{'/my_jindong/order/'+${session.userId}}"><span class="glyphicon glyphicon-check"></span> 我的订单</a></li>
+        <li th:class="${item=='delivery'}?'active' "><a th:href="@{'/my_jindong/delivery/'+${session.userId}}"><span class="glyphicon glyphicon-list-alt"></span> 收货地址</a></li>
+        <li role="presentation" class="divider"></li>
+
+    </ul>
+
+</div>
+</body>
+</html>

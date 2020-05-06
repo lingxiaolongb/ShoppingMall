@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>登录界面</title>
+
+<link rel="stylesheet" href="login/css/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="login/css/styled.css">
+
+</head>
+<body>
+
+
+<div class="materialContainer">
+	<div class="box">
+        <form method="post" th:action="@{/login}">
+		<div class="title">登录</div>
+            <p style="color: red;font-size: 12px" th:if="${errorTip}" th:text="${errorTip}"></p>
+		<div class="input">
+			<label for="name">用户名</label>
+			<input type="text" name="username" id="name" autocomplete="off">
+			<span class="spin"></span>
+		</div>
+		<div class="input">
+			<label for="pass">密码</label>
+			<input type="password" name="password" id="pass" autocomplete="off">
+			<span class="spin"></span>
+		</div>
+            <div>
+                <input type="checkbox" name="remember" value="1">
+                <label for="name">请记住我</label>
+            </div>
+
+		<div class="button login">
+			<button>
+				<span>登录</span>
+				<i class="fa fa-check"></i>
+			</button>
+		</div>
+		<a href="javascript:" class="pass-forgot">忘记密码？</a>
+        </form>
+	</div>
+
+	<div class="overbox">
+		<div class="material-button alt-2">
+			<span class="shape"></span>
+		</div>
+		<div class="title">注册</div>
+		<div class="input">
+			<label for="regname">用户名</label>
+			<input type="text" name="regname" id="regname" autocomplete="off">
+			<span class="spin"></span>
+		</div>
+		<div class="input">
+			<label for="regpass">密码</label>
+			<input type="password" name="regpass" id="regpass" autocomplete="off">
+			<span class="spin"></span>
+		</div>
+		<div class="input">
+			<label for="reregpass">确认密码</label>
+			<input type="password" name="reregpass" autocomplete="off" id="reregpass">
+			<span class="spin"></span>
+		</div>
+		<div class="button">
+			<button>
+				<span>注册</span>
+			</button>
+		</div>
+	</div>
+
+</div>
+
+<script src="login/js/jquery.min.js"  type="text/javascript"></script>
+<script src="login/js/login.js" type="text/javascript"></script>
+
+</body>
+</html>

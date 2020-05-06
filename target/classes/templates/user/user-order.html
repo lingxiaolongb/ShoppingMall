@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的订单</title>
+
+    <link href="/user/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/user/css/styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="/user/css/user-order.css" />
+</head>
+
+<body>
+
+<div th:replace="common/user-head::head"></div>
+<div th:replace="common/user-left::left(item='order')"></div>
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div style="height: 50px;"></div>
+    <!-- 上面那个浮动漏了-->
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="javascript:;"><span class="glyphicon glyphicon-check"></span></a></li>
+            <li class="active">我的订单</li>
+        </ol>
+    </div>
+
+    <ul class="layui-nav ">
+        <li class="layui-nav-item layui-this"><a class="cancel" href="javascript:;">所有订单</a></li>
+        <li class="layui-nav-item"><a class="cancel" href="javascript:;">待付款</a></li>
+        <li class="layui-nav-item"><a class="cancel" href="javascript:;">待发货</a></li>
+        <li class="layui-nav-item"><a class="cancel" href="javascript:;">待收货</a> </li>
+        <li class="layui-nav-item"><a class="cancel" href="javascript:;">待评价</a></li>
+    </ul>
+    <div class="j_order">
+        <div class="order_head">
+            <ul class="explain">
+                <li>宝贝</li>
+                <li>单价</li>
+                <li>数量</li>
+                <li>实付款</li>
+                <li>交易状态</li>
+                <li>交易操作</li>
+            </ul>
+        </div>
+        <div class="order_con">
+            <div class="item" th:each="order:${orderInfos}" th:id="${order.orderId}">
+                <table class="bought_table">
+                    <col width="32%">
+                    <col width="8%">
+                    <col width="19%">
+                    <col width="11%">
+                    <col width="15%">
+                    <col width="23%">
+                    <thead class="info">
+                    <td colspan="2">
+                        <input type="checkbox" />
+                        <label th:text="${#dates.format(order.purchaseTime, 'yyyy-MM-dd')}"></label>
+                        <span th:text="'订单号:'+${order.orderId}"></span>
+                    </td>
+                    <td colspan="1"><a class="seller" href="javascript:void(0)" title="恒乐康大药房旗舰店">恒乐康大药房旗舰店</a></td>
+                    <td colspan="3" align="right"><a class="glyphicon glyphicon-trash pos">删除</a></td>
+                    </thead>
+                    <tbody>
+                    <tr class="bought_tr" >
+                        <td>
+                            <div class="con">
+                                <a class="pic" href="javascript:void(0)">
+                                    <img th:src="@{'/site/img/'+${order.productInfo.prodPic}}" />
+                                </a>
+                                <div class="jieshao">
+                                    <a class="introduction" th:text="${order.productInfo.describe}" th:title="${order.productInfo.describe}">
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                        <td align="right" th:text="'￥ '+${order.productInfo.price}"></td>
+                        <td align="center" th:text="${order.quantity}"></td>
+                        <td align="left" th:text="${'￥ '+order.totalPrice}"></td>
+                        <td>交易成功</td>
+                        <td><a class="again">再次购买</a></td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+
+
+        </div>
+
+
+        <div style="clear: both;"></div>
+    </div>
+
+
+</div>
+
+<script src="/common/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/user/js/bootstrap.min.js"></script>
+<script src="/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+    layui.use(['element', 'form'], function() {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        var form = layui.form;
+        //监听导航点击
+        element.on('nav(demo)', function(elem) {
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+<script src="/user/js/order.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+
+    ! function($) {
+        $(document).on("click", "ul.nav li.parent > a > span.icon", function() {
+            $(this).find('em:first').toggleClass("glyphicon-minus");
+        });
+        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+    }(window.jQuery);
+
+    $(window).on('resize', function() {
+        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+    });
+    $(window).on('resize', function() {
+        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+    })
+</script>
+</body>
+
+</html>

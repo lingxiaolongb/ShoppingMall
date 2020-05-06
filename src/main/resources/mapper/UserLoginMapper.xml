@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itlong.mapper.UserLoginMapper">
+  <resultMap id="BaseResultMap" type="com.itlong.bean.UserLogin">
+    <id column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="login_time" jdbcType="VARCHAR" property="loginTime" />
+    <result column="user_state" jdbcType="TINYINT" property="userState" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_login
+    where username = #{username,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.itlong.bean.UserLogin">
+    insert into user_login (username, password, login_time, 
+      user_state, phone)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{loginTime,jdbcType=VARCHAR}, 
+      #{userState,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.itlong.bean.UserLogin">
+    update user_login
+    set password = #{password,jdbcType=VARCHAR},
+      login_time = #{loginTime,jdbcType=VARCHAR},
+      user_state = #{userState,jdbcType=TINYINT},
+      phone = #{phone,jdbcType=VARCHAR}
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select username, password, login_time, user_state, phone
+    from user_login
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select username, password, login_time, user_state, phone
+    from user_login
+  </select>
+
+    <!-- 1.检查用户名是否正确-->
+ <select id="selectCheckAccount" resultMap="BaseResultMap">
+     select username, password, login_time, user_state, phone
+     from user_login
+    where username=#{username}
+ </select>
+
+    <!-- 2.根据手机号与用户名查询用户是否存在-->
+    <select id="selectByTargetName" resultMap="BaseResultMap">
+        select username, password, login_time, user_state, phone
+        from user_login
+        where username = #{targetName,jdbcType=VARCHAR} or phone = #{targetName,jdbcType=VARCHAR}
+    </select>
+
+
+</mapper>

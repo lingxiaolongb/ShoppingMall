@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itlong.mapper.CartInfoMapper">
+  <resultMap id="BaseResultMap" type="com.itlong.bean.CartInfo">
+    <id column="cart_id" jdbcType="VARCHAR" property="cartId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="prod_id" jdbcType="VARCHAR" property="prodId" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cart_info
+    where cart_id = #{cartId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.itlong.bean.CartInfo">
+    insert into cart_info (cart_id, user_id, prod_id, 
+      price, add_time, prod_name
+      )
+    values (#{cartId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{prodId,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{addTime,jdbcType=TIMESTAMP}, #{prodName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.itlong.bean.CartInfo">
+    update cart_info
+    set user_id = #{userId,jdbcType=VARCHAR},
+      prod_id = #{prodId,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      prod_name = #{prodName,jdbcType=VARCHAR}
+    where cart_id = #{cartId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select cart_id, user_id, prod_id, price, add_time, prod_name
+    from cart_info
+    where cart_id = #{cartId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select cart_id, user_id, prod_id, price, add_time, prod_name
+    from cart_info
+  </select>
+
+    <!--1.查询购物车内的数量 -->
+    <select id="selectRow" resultType="int">
+        select count(*) from cart_info
+    </select>
+
+
+
+    <!--2.根据用户id查询购物车的商品 -->
+    <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select cart_id, user_id, prod_id, price, add_time, prod_name
+        from cart_info
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <!--3.根据某个用户是否将某个商品存入数据库-->
+    <select id="selectProdDuplicate"  resultMap="BaseResultMap">
+        select cart_id, user_id, prod_id, price, add_time, prod_name
+        from cart_info
+        where user_id = #{userId,jdbcType=VARCHAR} and prod_id = #{prodId,jdbcType=VARCHAR}
+    </select>
+
+    <!--4.根据某个用户是删除购物车的商品-->
+   <delete id="deleteItemByProdId" parameterType="java.util.List">
+       delete from cart_info
+       where user_id=#{userId} and prod_id
+        <foreach collection="prodIds" item="prodId" open="in(" close=")" separator="," >
+            #{prodId}
+        </foreach>
+   </delete>
+
+
+
+
+</mapper>

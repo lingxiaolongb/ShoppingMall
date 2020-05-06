@@ -1,0 +1,65 @@
+*, ::before, ::after{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /*去除移动端点击产生的高亮状态*/
+    -webkit-tap-highlight-color: transparent;
+}
+html,body{
+	height: 100%;
+}
+.tips{
+	width: 1024px;
+	height: auto;
+	margin: 100px auto;
+	
+}
+.tips .pic{
+	float: left;
+	margin-left: 10px;
+}
+.tips .info{
+	float: left;
+	position: relative;
+
+
+}
+.info .con{
+	position: relative;
+	top: 200px;
+}
+.info p{
+	margin: 10px 0;
+}
+.info .con .buy-ok{
+	font-size: 40px;
+	color: #FF0000;
+	font-weight: bold;
+}
+.tips .info a{
+	text-decoration: none;
+	cursor: pointer;
+	color: #5555ff;
+}
+
+.tips .info a:hover{
+		color: #ff007f;
+}
+.info .con .my-order{
+	font-size: 24px;
+	font-weight: bold;
+
+	
+}
+ .con .my-order a{
+	color: #ff55ff;
+	text-decoration: underline;
+	
+}
+.info .con .my-cart,.order-again{
+	font-size: 14px;
+	text-align: right;
+}

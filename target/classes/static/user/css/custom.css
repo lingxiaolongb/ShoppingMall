@@ -1,0 +1,29 @@
+.con_bor{
+	
+	
+	border: 1px #C0C4CC solid;
+	height: 500px;
+	width: 700px;
+	padding:100px 150px;
+	margin: 20px 200px;
+	
+	
+}
+
+html,body{
+    height: 100%;
+}
+.con_font{
+	font-size: 14px;
+	font-weight: normal;
+	width: auto;
+}
+
+.cancel{
+    text-decoration: none;
+
+}
+
+.cancel:hover{
+    text-decoration: none;
+}

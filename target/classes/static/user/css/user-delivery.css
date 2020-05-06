@@ -1,0 +1,68 @@
+.cancel:hover{
+	text-decoration: none;
+}
+
+html,body{
+    height: 100%;
+
+}
+
+.wAndH{
+	width: 678px!important;
+	height: 38px!important;
+	padding-left: 10px;
+}
+
+.star{
+	color: red;
+}
+.j_delivery{
+	margin: 20px auto;
+	width: 1024px;
+	min-width: 1024px;
+	
+}
+
+.separator{
+	width: 1024px;
+	margin: 20px auto;
+	height: 40px;
+	background-color: #b4fdfd;	
+	box-shadow: none;
+	border-style: solid;
+	border-color:  #b4fdfd;
+	line-height: 40px;
+}
+.delivery_info{
+	width: 1024px;
+	height: auto;
+	margin: 20px auto ;
+	font-size: 13px;
+
+}
+.delivery_info table tr td{
+	vertical-align: middle;
+}
+
+.del_delivery{
+	cursor: pointer!important;
+}
+
+.del_delivery:hover{
+	text-decoration: none;
+	color: red;
+
+}
+
+.set_default{
+    height: 25px;
+    border:  1px solid #cc4654;
+    width: 80px;
+    background-color: #FFFFFF;
+
+}
+
+.set_default:hover{
+    color: white;
+    background-color: #ff007f;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的余额</title>
+
+    <link href="/user/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/user/css/datepicker3.css" rel="stylesheet" type="text/css">
+    <link href="/user/css/styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="/user/css/user-balance.css"/>
+
+</head>
+
+<body>
+
+<div th:replace="common/user-head::head"></div>
+<div th:replace="common/user-left::left(item='balance')"></div>
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div style="height: 50px;"></div>
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#"><span class="glyphicon glyphicon-credit-card"></span></a></li>
+            <li class="active">我的余额</li>
+        </ol>
+    </div>
+    <!-- 上面那个浮动漏了-->
+
+    <ul class="layui-nav layui-bg-black">
+        <li class="layui-nav-item layui-this"><a class="cancel" href="javascript:;">我的余额</a></li>
+    </ul>
+
+
+    <div class="j_balance">
+
+
+        <div class="my_money">
+            <span>当前余额:</span>
+            <span id="balance" th:text="${balance}+'元'"></span>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-normal layui-btn-fluid change" id="cz" >充值</button>
+
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-normal layui-btn-fluid change" id='tx' >提现</button>
+
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn   layui-btn-danger layui-btn-fluid change" id='zz'>转账</button>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-warm layui-btn-fluid change" id="yeb">余额宝(未做)</button>
+        </div>
+
+
+    </div>
+</div>
+
+    <script src="/common/js/jquery-3.3.1.min.js"></script>
+    <script src="/user/js/bootstrap.min.js"></script>
+    <script src="/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+
+    <script>
+        layui.use(['element', 'form'], function() {
+            var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+            var form = layui.form;
+            //监听导航点击
+            element.on('nav(demo)', function(elem) {
+                //console.log(elem)
+                layer.msg(elem.text());
+            });
+        });
+    </script>
+    <script src="/user/js/balance.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+
+
+        ! function($) {
+            $(document).on("click", "ul.nav li.parent > a > span.icon", function() {
+                $(this).find('em:first').toggleClass("glyphicon-minus");
+            });
+            $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+        }(window.jQuery);
+
+        $(window).on('resize', function() {
+            if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+        });
+        $(window).on('resize', function() {
+            if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+        })
+    </script>
+
+</body>
+</html>

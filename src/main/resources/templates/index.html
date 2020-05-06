@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <title>购物首页地址</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="/site/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/site/css/slider.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="/common/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/site/js/move-top.js"></script>
+    <script type="text/javascript" src="/site/js/easing.js"></script>
+    <script type="text/javascript" src="/site/js/startstop-slider.js"></script>
+    <script src="/layer/layer.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <div class="header">
+        <div class="headertop_desc">
+            <div class="call">
+                <p><span>需要帮助</span>请拨打<span class="number">0571-8684181445</span></p>
+            </div>
+            <div class="account_desc">
+                <ul>
+                    <li shiro:guest=""><a th:href="@{/toLogin}">亲,请登录</a></li>
+                    <li shiro:user="">
+                    <a th:if="${session.memberName}"  th:text="${session.memberName}"  th:href="@{'/my_jindong/info/'+${session.userId}}" ></a></li>
+                    <li><a th:href="@{'/my_jindong/info'+${session.userId==null?'':'/'+session.userId}}">我的京东</a></li>
+                    <li shiro:guest=""><a th:href="@{/toLogin}">免费注册</a></li>
+                    <li><a th:href="@{'/my_jindong/cart'+${session.userId==null?'':'/'+session.userId}}">购物车</a></li>
+                    <li><a href="#">联系客服</a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="header_top">
+            <div class="logo">
+                <a href="index.html"><img src="site/img/logo.png" alt="" /></a>
+            </div>
+            <div class="cart">
+                <p>欢迎来到天尚购物网&nbsp;我的购物车:<span>0</span>
+                <div id="dd" class="wrapper-dropdown-2">
+                <ul class="dropdown">
+                    <li shiro:user="">最近加入的宝贝:</li>
+                    <li shiro:guest="">你还没有登录:</li>
+                    <li shiro:guest=""><a a th:href="@{/toLogin}"><button>点击登录</button></a></li>
+                    <li shiro:user=""><a th:href="@{'/my_jindong/cart'+${session.userId==null?'':'/'+session.userId}}"><button>查看我的购物车</button></a></li>
+                </ul></div></p>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+        <div class="header_bottom">
+            <div class="menu">
+                <ul>
+                    <li class="active"><a href="index.html">首页</a></li>
+                    <li><a href="about.html">网站介绍</a></li>
+                    <li><a href="delivery.html">快递中心</a></li>
+                    <li><a href="news.html">新闻</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
+                    <li><div class="clear"></div></li>
+                </ul>
+            </div>
+            <div class="search_box">
+                <form>
+                    <input type="text" name="search" placeholder="找你想要的吧">
+                    <input type="submit" value="">
+                </form>
+        </div>
+            <div class="clear"></div>
+        </div>
+        <div class="header_slide">
+            <div class="header_bottom_left">
+                <div class="categories">
+                    <ul>
+                        <li><h3>商品类别</h3></li>
+                        <li><a href="#">各大手机</a></li>
+                        <li><a href="#">电器产品</a></li>
+                        <li><a href="#">笔记本电脑</a></li>
+                        <li><a href="#">车型零件</a></li>
+                        <li><a href="#">西巷软件</a></li>
+                        <li><a href="#">健身器材</a></li>
+                        <li><a href="#">精品靴子</a></li>
+                        <li><a href="#">首饰一家</a></li>
+                        <li><a href="#">服装饰品</a></li>
+                        <li><a href="#">家居装饰</a></li>
+                        <li><a href="#">美容保健</a></li>
+                        <li><a href="#">孩童玩具</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="header_bottom_right">
+                <div class="slider">
+                    <div id="slider">
+                        <div id="mover">
+                            <div id="slide-1" class="slide">
+                                <div class="slider-img">
+                                    <a href="/market"><img src="site/img/slide-1-image.png" alt="learn more" /></a>
+                                </div>
+                                <div class="slider-text">
+                                    <h1>清仓<br><span>大甩卖</span></h1>
+                                    <h2>只需8折 你需要的</h2>
+                                    <div class="features_list">
+                                        <h4>进一步了解我们令人难忘的服务，Lorem Ipsum只是一个虚拟文本</h4>
+                                    </div>
+                                    <a href="/market" class="button">快快快!</a>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+
+                            <div class="slide">
+                                <div class="slider-text">
+                                    <h1>商品<br><span>大出血</span></h1>
+                                    <h2>只需6折 你赚到啦</h2>
+                                    <div class="features_list">
+                                        <h4>窝窝头一块钱四个,嘿嘿，嘿嘿！</h4>
+                                    </div>
+                                    <a href="/market" class="button">秒杀它</a>
+                                </div>
+                                <div class="slider-img">
+                                    <a href="/market"><img src="site/img/slide-3-image.jpg" alt="learn more" /></a>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+
+                            <div class="slide" >
+                                <div class="slider-img">
+                                    <a href="/market"><img src="site/img/slide-2-image.jpg" alt="learn more" /></a>
+                                </div>
+                                <div class="slider-text">
+                                    <h1>来啦,来啦<br><span>998</span></h1>
+                                    <h2>他来了,他来了,现在购买即可省下3000刀</h2>
+                                    <div class="features_list">
+                                        <h4>只有你想不到,没有做不到</h4>
+                                    </div>
+                                    <a href="/market" class="button">立即抢购</a>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >θҳģѥ</a></div>
+    <div class="main">
+        <div class="content">
+            <div class="content_top">
+                <div class="heading">
+                    <h3>新产品</h3>
+                </div>
+                <div class="see">
+                    <p><a href="#">点击查看所有新推商品</a></p>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="section group" >
+
+                <div class="grid_1_of_4 images_1_of_4" th:each="news:${newProd}">
+                    <a th:href="@{'/market/'+${news.prodId}}"><img th:src="@{'/site/img/'+${news.prodPic}}" th:alt="${news.prodName}" /></a>
+                    <h2 th:text="${news.prodName}"></h2>
+                    <div class="price-details">
+                        <div class="price-number">
+                            <p><span class="rupees" th:text="'¥'+${news.price}"></span></p>
+                        </div>
+                        <div class="add-cart">
+                            <h4><a href="javascript:;" class="addProdToCart" th:attr="prodId=${news.prodId}">加入购物车</a></h4>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+            <div class="content_bottom">
+                <div class="heading">
+                    <h3>热门产品</h3>
+                </div>
+                <div class="see">
+                    <p><a href="#">点击查看所有热门商品</a></p>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="section group">
+
+                <div class="grid_1_of_4 images_1_of_4"  th:each="news:${hotsPot}">
+                    <a th:href="@{'/market/'+${news.prodId}}"><img th:src="@{'/site/img/'+${news.prodPic}}" th:alt="${news.prodName}" /></a>
+                    <h2 th:text="${news.prodName}"></h2>
+                    <div class="price-details">
+                        <div class="price-number">
+                            <p><span class="rupees" th:text="'¥'+${news.price}"></span></p>
+                        </div>
+                        <div class="add-cart">
+                            <h4><a href="javascript:;" class="addProdToCart" th:attr="prodId=${news.prodId}">加入购物车</a></h4>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="wrap">
+        <div class="section group">
+            <div class="col_1_of_4 span_1_of_4">
+                <h4>我们的信息</h4>
+                <ul>
+                    <li><a href="about.html">关于我们</a></li>
+                    <li><a href="contact.html">建议我们</a></li>
+                    <li><a href="delivery.html">订单反馈</a></li>
+                    <li><a href="contact.html">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="col_1_of_4 span_1_of_4">
+                <h4>为什么购买我们的产品</h4>
+                <ul>
+                    <li><a href="about.html">超级电脑</a></li>
+                    <li><a href="contact.html">顾客至上</a></li>
+                    <li><a href="#">便捷双方</a></li>
+                    <li><a href="contact.html">网站美丽</a></li>
+                    <li><a href="#">搜寻全有</a></li>
+                </ul>
+            </div>
+            <div class="col_1_of_4 span_1_of_4">
+                <h4>我的账户</h4>
+                <ul>
+                    <li><a href="contact.html">登录</a></li>
+                    <li><a href="index.html">我的购物车</a></li>
+                    <li><a href="#">我的购物清单</a></li>
+                    <li><a href="#">我的订单</a></li>
+                    <li><a href="contact.html">帮助</a></li>
+                </ul>
+            </div>
+            <div class="col_1_of_4 span_1_of_4">
+                <h4>联系人</h4>
+                <ul>
+                    <li><span>+91-123-456789</span></li>
+                    <li><span>+00-123-000000</span></li>
+                </ul>
+                <div class="social-icons">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#" target="_blank"><img src="/site/img/facebook.png" alt="" /></a></li>
+                        <li><a href="#" target="_blank"><img src="/site/img/twitter.png" alt="" /></a></li>
+                        <li><a href="#" target="_blank"><img src="/site/img/skype.png" alt="" /> </a></li>
+                        <li><a href="#" target="_blank"> <img src="/site/img/dribbble.png" alt="" /></a></li>
+                        <li><a href="#" target="_blank"> <img src="/site/img/linkedin.png" alt="" /></a></li>
+                        <li><div class="clear"></div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copy_right">
+        <p>Copyright &copy; 2020 超级电脑公司 天喜本是一家 <a href="#" target="_blank" >狮子王</a>闹太难 <a href="http://www.cssmoban.com/" target="_blank">one world! one dream!</a></p>
+    </div>
+</div>
+<script type="text/javascript">
+    function DropDown(el) {
+        this.dd = el;
+        this.initEvents();
+    }
+    DropDown.prototype = {
+        initEvents : function() {
+            var obj = this;
+            obj.dd.on('click', function(event){
+                $(this).toggleClass('active');
+                event.stopPropagation();
+            });
+        }
+    };
+
+    $(function() {
+        var dd = new DropDown( $('#dd') );
+
+        $(document).click(function() {
+            $('.wrapper-dropdown-2').removeClass('active');
+        });
+
+    });
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $().UItoTop({ easingType: 'easeOutQuart' });
+    });
+</script>
+<script src="/common/js/add-cart.js" type="text/javascript"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itlong.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.itlong.bean.UserInfo">
+    <id column="user_id" jdbcType="CHAR" property="userId" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="balance" jdbcType="DECIMAL" property="balance" />
+    <result column="pic_path" jdbcType="VARCHAR" property="picPath" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_info
+    where user_id = #{userId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.itlong.bean.UserInfo">
+    insert into user_info (user_id, member_name, real_name, 
+      gender, email, balance, 
+      pic_path, username, register_time, 
+      phone)
+    values (#{userId,jdbcType=CHAR}, #{memberName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, 
+      #{picPath,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, 
+      #{phone,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.itlong.bean.UserInfo">
+    update user_info
+    set member_name = #{memberName,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      email = #{email,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DECIMAL},
+      pic_path = #{picPath,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      phone = #{phone,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=CHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select user_id, member_name, real_name, gender, email, balance, pic_path, username, 
+    register_time, phone
+    from user_info
+    where user_id = #{userId,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select user_id, member_name, real_name, gender, email, balance, pic_path, username, 
+    register_time, phone
+    from user_info
+  </select>
+
+    <!--1.根据用户名查询用户信息 -->
+    <select id="selectInfoByUsername" resultMap="BaseResultMap">
+        select user_id, member_name, real_name, gender, email, balance, pic_path,
+             phone
+        from user_info
+        where username=#{username}
+    </select>
+
+
+
+
+
+</mapper>

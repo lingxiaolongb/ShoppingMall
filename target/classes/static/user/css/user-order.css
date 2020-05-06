@@ -1,0 +1,152 @@
+.cancel:hover{
+	text-decoration: none;
+}
+html,body{
+    height: 100%;
+}
+.j_order{
+	width:auto;
+	height: auto;
+	min-width: 1024px;
+	margin-top: 20px;
+}
+
+.j_order .order_head{
+	background-color: #E8E8E8;
+	margin-bottom: 20px;
+	overflow: hidden;	
+	width: 90%;
+}
+
+.j_order .order_head .explain{
+	list-style: none;
+	vertical-align: middle;
+	font-size: 13px;
+}
+
+input[type="checkbox"]{
+	box-sizing: border-box;
+	width: 15px;
+	height: 15px;
+	top: 3px;
+	position: relative;
+	margin-left: 10px;
+}
+
+
+.order_head .explain li{
+	float: left;
+	width: 130px;
+	line-height: 50px;
+	text-align: center;
+}
+
+.order_head .explain li:first-child{
+	width: 360px;
+}
+.order_head .explain li:last-child{
+	width: 200px;
+	text-align: right;
+}
+
+.j_order .order_con{
+	height: auto;
+	overflow: hidden;
+}
+
+.j_order .order_con .item{
+	height: auto ;
+	border: 1px solid #B2B2B2;
+	width: 90%;
+	margin-bottom: 15px;
+}
+.order_con .item .bought_table{
+	width: 100%;
+	border-spacing: 0;
+	color: #3C3C3C;
+}
+ .bought_table .info  td{
+	background-color: #E8E8E8;
+	height: 40px;
+}
+.pos{
+	  position: relative;
+	  right: 40px;
+	  cursor: pointer;
+	  text-decoration: none;
+  }
+  
+
+ .bought_table .info .seller{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block;
+	max-width: 100px;
+	text-decoration: none;
+	height: 40px;
+	line-height: 40px;
+	color: #0088CC;
+ }
+ 
+ 
+  .bought_table .bought_tr td{
+	  height: auto;
+	 font-size: 13px;
+  }
+  
+  
+  .bought_table .bought_tr td:nth-child(3){
+  	border-right: 1px solid #E8E8E8;
+  	
+  }
+  .bought_table .bought_tr td:nth-child(4){
+	border-right: 1px solid #E8E8E8;
+	
+  }
+  .bought_table .bought_tr td:nth-child(5){
+  		border-right: 1px solid #E8E8E8;
+  	
+  }
+ 
+  
+ .bought_table .bought_tr .con {
+  	  margin:15px 0 20px 15px;
+	   user-select: none;
+  }
+  
+  
+ .con .pic img{
+	  width: 80px;
+	  height: 80px;
+	  vertical-align: top;
+	 
+	 
+ }
+ 
+  .bought_tr .con .jieshao{
+	  width: 240px;
+	  display: inline-block;
+
+  }
+ .bought_tr .con .introduction{
+  	  width: 240px;
+	  margin-left: 10px;
+	  text-decoration: none;
+	  cursor: pointer;
+		overflow : hidden;
+	   text-overflow: ellipsis;
+	   display: -webkit-box;
+	   -webkit-line-clamp: 2;      /* 可以显示的行数，超出部分用...表示*/
+	   -webkit-box-orient: vertical;
+
+  }
+  .introduction:hover, .again:hover,.pos:hover{
+	  color: red;
+	  opacity: 0.6;
+	     text-decoration: none;
+  }
+  .again{
+	  text-decoration: none;
+	  cursor: pointer;
+  }

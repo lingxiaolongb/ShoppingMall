@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itlong.mapper.ProductInfoMapper">
+  <resultMap id="BaseResultMap" type="com.itlong.bean.ProductInfo">
+    <id column="prod_id" jdbcType="VARCHAR" property="prodId" />
+    <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="prod_date" jdbcType="DATE" property="prodDate" />
+    <result column="prod_pic" jdbcType="VARCHAR" property="prodPic" />
+    <result column="integral" jdbcType="SMALLINT" property="integral" />
+    <result column="Prod_detail" jdbcType="LONGVARCHAR" property="prodDetail" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product_info
+    where prod_id = #{prodId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.itlong.bean.ProductInfo">
+    insert into product_info (prod_id, prod_name, price, 
+      `describe`, prod_date, prod_pic,
+      integral, Prod_detail)
+    values (#{prodId,jdbcType=VARCHAR}, #{prodName,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{describe,jdbcType=VARCHAR}, #{prodDate,jdbcType=DATE}, #{prodPic,jdbcType=VARCHAR}, 
+      #{integral,jdbcType=SMALLINT}, #{prodDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.itlong.bean.ProductInfo">
+    update product_info
+    set prod_name = #{prodName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      `describe` = #{describe,jdbcType=VARCHAR},
+      prod_date = #{prodDate,jdbcType=DATE},
+      prod_pic = #{prodPic,jdbcType=VARCHAR},
+      integral = #{integral,jdbcType=SMALLINT},
+      Prod_detail = #{prodDetail,jdbcType=LONGVARCHAR}
+    where prod_id = #{prodId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select prod_id, prod_name, price, `describe`, prod_date, prod_pic, integral, Prod_detail
+    from product_info
+    where prod_id = #{prodId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select prod_id, prod_name, price, `describe`, prod_date, prod_pic, integral, Prod_detail
+    from product_info
+  </select>
+
+    <!--1.按积分查询前四个热商品 -->
+<select id="selectByMaxScore" resultMap="BaseResultMap">
+    select prod_id, prod_name, price, `describe`, prod_date, prod_pic, integral, Prod_detail
+    from product_info
+    order by  integral desc
+    limit 4
+</select>
+    <!--2.按积分查询前四个新商品 -->
+    <select id="selectByMinScore" resultMap="BaseResultMap">
+        select prod_id, prod_name, price, `describe`, prod_date, prod_pic, integral, Prod_detail
+        from product_info
+        order by  integral
+        limit 4
+    </select>
+    <!--3.随机查询四个商品 -->
+    <select id="selectByRandom" resultMap="BaseResultMap">
+       select prod_id, prod_name, price, `describe`, prod_date, prod_pic, integral, Prod_detail
+        from product_info
+        limit #{limit},#{row}
+    </select>
+
+    <!--4.随机查询商品数量配合随机操作 -->
+    <select id="selectRow" resultType="int">
+        select count(*) from product_info
+    </select>
+
+    <!--5.根据购物车内容查询 -->
+    <select id="selectByCartInfos" resultMap="BaseResultMap">
+        select prod_id, prod_name, price, `describe`, prod_date, prod_pic, integral, Prod_detail
+        from product_info
+       where prod_id
+            <foreach collection="cartInfos" separator="," open="in(" close=")" item="cartInfo">
+                #{cartInfo.prodId}
+            </foreach>
+        <if test="cartInfos!=null">
+        order by
+        instr(replace(replace(replace(
+            <foreach collection="cartInfos" open="'," close=",'" separator="," item="cartInfo" >
+            ${cartInfo.prodId}
+        </foreach>,char(13),''),char(10),''),' ',''),CONCAT(',',`prod_id`,','))
+        </if>
+    </select>
+
+
+    <!--6.根据多个产品Id查询信息 -->
+    <select id="selectByProdIds" resultMap="BaseResultMap" parameterType="java.util.List">
+        select prod_id, prod_name, price, `describe`, prod_date, prod_pic, integral, Prod_detail
+        from product_info
+        where prod_id
+        <foreach collection="prods" separator="," open="in(" close=")" item="prodId">
+            #{prodId}
+        </foreach>
+        <if test="prods!=null">
+        order by
+        instr(replace(replace(replace(
+        <foreach collection="prods" open="'," close=",'" separator="," item="prodId" >
+            ${prodId}
+        </foreach>,char(13),''),char(10),''),' ',''),CONCAT(',',`prod_id`,','))
+        </if>
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的购物车</title>
+
+    <link href="/user/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/user/css/datepicker3.css" rel="stylesheet" type="text/css">
+    <link href="/user/css/styles.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="/user/css/user-cart.css"/>
+
+</head>
+
+<body>
+<div th:replace="common/user-head::head"></div>
+<div th:replace="common/user-left::left(item='cart')"></div>
+
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div style="height: 50px;"></div>
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+            <li class="active">我的购物车</li>
+        </ol>
+    </div>
+    <!-- 上面那个浮动漏了-->
+
+    <ul class="layui-nav layui-bg-black">
+        <li class="layui-nav-item"><a class="cancel" href="javascript:void(0)">全部商品<label th:text="${number==null?'0':number}" ></label></a></li>
+    </ul>
+
+
+
+    <div class="j_cart">
+        <div class="cart_head">
+            <ul class="explain">
+                <li><input type="checkbox" class="selected" name="check" /></li>
+                <li>全选</li>
+                <li>商品</li>
+                <li></li>
+                <li>单价</li>
+                <li>数量</li>
+                <li>小计</li>
+                <li>操作</li>
+            </ul>
+        </div>
+        <div class="cart_con">
+            <div class="item" th:each="cartInfo,iterStat:${cartInfos}" th:if="${cartInfos}" th:id="${cartInfo.prodId}">
+                <div class="left">
+                    <input class="top" type="checkbox" name="check" />
+                    <img th:src="@{'/site/img/'+${prodInfos[iterStat.index].prodPic}}"/>
+                    <a class="desc" th:text="${prodInfos[iterStat.index].describe}"></a>
+                </div>
+                <div class="right">
+                    <div class="price">¥&nbsp;<span class="real" th:text="${prodInfos[iterStat.index].price}"></span></div>
+                    <div class="number"><a class="oper operd">-</a><input class="num" value="1" autocomplete="off" type="text" name="num"><a class="oper operi">+</a>
+                        <p class="tip"></p>
+                    </div>
+                    <div class="all_price"  th:text="${'¥ '+prodInfos[iterStat.index].price}"></div>
+                    <div class="del"><a href="javascript:void(0)" class="item-del">删除</a></div>
+                </div>
+
+            </div>
+
+
+            <!-- ---------- 分割线---------- -->
+            <div style="clear: both;"></div>
+        </div>
+
+        <div class="cart_bottom">
+            <div class="left">
+                <input type="checkbox" class="selected" name="check" />
+                <span>全选</span>
+                <a class="del" id="del">删除选中商品</a>
+            </div>
+            <div class="right">
+                <ul class="settle">
+                    <li>已选择&nbsp;<span id="all" class="all_num">0</span>&nbsp;件商品</li>
+                    <li>总价:&nbsp;<span class="money" id="money">¥0.00</span></li>
+                    <li><a href="javascript:void(0)"><button class="buy" id="buy" type="button">结&nbsp;算</button></a></li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<script src="/common/js/jquery-3.3.1.min.js"></script>
+<script src="/user/js/bootstrap.min.js"></script>
+<script src="/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    layui.use(['element', 'form'], function() {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        var form = layui.form;
+        //监听导航点击
+        element.on('nav(demo)', function(elem) {
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+<script src="/user/js/cart.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+
+    ! function($) {
+        $(document).on("click", "ul.nav li.parent > a > span.icon", function() {
+            $(this).find('em:first').toggleClass("glyphicon-minus");
+        });
+        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+    }(window.jQuery);
+
+    $(window).on('resize', function() {
+        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+    });
+    $(window).on('resize', function() {
+        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+    })
+</script>
+
+</body>
+
+</html>
