@@ -5,10 +5,19 @@ import java.math.BigDecimal;
 
 public class ShopInfo implements Serializable {
 
+    private static final long serialVersionUID = 6323436254656380977L;
+
     private String prodId;
     private int num;
-    private BigDecimal price;
+    private  BigDecimal price;
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     public String getProdId() {
         return prodId;
@@ -26,13 +35,6 @@ public class ShopInfo implements Serializable {
         this.num = num;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 
     @Override
     public String toString() {
@@ -42,7 +44,4 @@ public class ShopInfo implements Serializable {
                 ", price=" + price +
                 '}';
     }
-
-
-
 }

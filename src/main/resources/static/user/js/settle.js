@@ -11,18 +11,7 @@ $('input[name="address"]').click(function(){
 
 $('#submit-order').click(function(){
 	var ugaId=$('input[name="address"]:checked').attr('id');
+    $("#create-order").attr("action",'/cart/order_deal/'+ugaId);
+	$("#create-order").submit();
 
-	$.ajax({
-        url:'/cart/order_deal/'+ugaId,
-        method:'post',
-        success:function (msg) {
-            if(msg=='not'){
-                layer.msg('你的当前余额不足,请充值',{icon:0});
-            }else{
-                window.location.href='http://localhost:8080/cart/order_success'
-            }
-        },error:function () {
-
-        }
-    });
 });

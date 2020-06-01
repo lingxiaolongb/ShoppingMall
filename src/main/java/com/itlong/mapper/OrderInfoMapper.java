@@ -21,4 +21,12 @@ public interface OrderInfoMapper {
     List<OrderInfo>  selectOrderInfoByUgdId( @Param("ugdIdList") List<String> ugdIdList);
 
     int insertOrders(List<OrderInfo> list);
+
+    List<OrderInfo> selectOrderById(String orderId);
+
+    int  updateOrderById(String orderId, int value);
+
+    int delItemByOrderId(String orderId);
+
+
 }

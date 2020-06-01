@@ -20,7 +20,7 @@
         <li th:class="${item}=='info'? 'active'"><a th:href="@{'/my_jindong/info/'+${session.userId}}"><span class="glyphicon glyphicon-user"></span> 个人资料</a></li>
         <li th:class="${item}=='balance'?'active' "><a th:href="@{'/my_jindong/balance/'+${session.userId}}"><span class="glyphicon glyphicon-credit-card"></span> 我的余额</a></li>
         <li th:class="${item}=='cart'?'active' "><a th:href="@{'/my_jindong/cart/'+${session.userId}}"><span class="glyphicon glyphicon-shopping-cart"></span> 我的购物车</a></li>
-        <li th:class="${item}=='order'?'active' "><a th:href="@{'/my_jindong/order/'+${session.userId}}"><span class="glyphicon glyphicon-check"></span> 我的订单</a></li>
+        <li th:class="${item}=='order'?'active' "><a th:href="@{'/my_jindong/order/'+${session.userId}}"><span class="glyphicon glyphicon-check"></span> 订单中心</a></li>
         <li th:class="${item=='delivery'}?'active' "><a th:href="@{'/my_jindong/delivery/'+${session.userId}}"><span class="glyphicon glyphicon-list-alt"></span> 收货地址</a></li>
         <li role="presentation" class="divider"></li>
 

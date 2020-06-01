@@ -3,22 +3,30 @@
 <mapper namespace="com.itlong.mapper.CartInfoMapper">
   <resultMap id="BaseResultMap" type="com.itlong.bean.CartInfo">
     <id column="cart_id" jdbcType="VARCHAR" property="cartId" />
+      <result column="prod_id" jdbcType="VARCHAR" property="prodId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="prod_id" jdbcType="VARCHAR" property="prodId" />
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
+      <result column="num" jdbcType="INTEGER" property="num" />
   </resultMap>
+
+
+    <sql id="BaseColumn">
+        cart_id, user_id, prod_id,  price, add_time, prod_name,num
+    </sql>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cart_info
     where cart_id = #{cartId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.itlong.bean.CartInfo">
-    insert into cart_info (cart_id, user_id, prod_id, 
-      price, add_time, prod_name
+    insert into cart_info (
+      <include refid="BaseColumn"/>
       )
     values (#{cartId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{prodId,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{addTime,jdbcType=TIMESTAMP}, #{prodName,jdbcType=VARCHAR}
+      #{price,jdbcType=DECIMAL}, #{addTime,jdbcType=TIMESTAMP}, #{prodName,jdbcType=VARCHAR},
+            #{num,jdbcType=INTEGER}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.itlong.bean.CartInfo">
@@ -27,20 +35,24 @@
       prod_id = #{prodId,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       add_time = #{addTime,jdbcType=TIMESTAMP},
-      prod_name = #{prodName,jdbcType=VARCHAR}
+      prod_name = #{prodName,jdbcType=VARCHAR},
+    num=#{num,jdbcType=INTEGER}
     where cart_id = #{cartId,jdbcType=VARCHAR}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select cart_id, user_id, prod_id, price, add_time, prod_name
+    select  <include refid="BaseColumn"/>
     from cart_info
     where cart_id = #{cartId,jdbcType=VARCHAR}
   </select>
 
   <select id="selectAll" resultMap="BaseResultMap">
-    select cart_id, user_id, prod_id, price, add_time, prod_name
+    select  <include refid="BaseColumn"/>
     from cart_info
   </select>
+
+
+
 
     <!--1.查询购物车内的数量 -->
     <select id="selectRow" resultType="int">
@@ -51,14 +63,14 @@
 
     <!--2.根据用户id查询购物车的商品 -->
     <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select cart_id, user_id, prod_id, price, add_time, prod_name
+        select <include refid="BaseColumn"/>
         from cart_info
         where user_id = #{userId,jdbcType=VARCHAR}
     </select>
 
-    <!--3.根据某个用户是否将某个商品存入数据库-->
+    <!--3.判断购物车中商品是否重复,重复将商品数量+1-->
     <select id="selectProdDuplicate"  resultMap="BaseResultMap">
-        select cart_id, user_id, prod_id, price, add_time, prod_name
+        select <include refid="BaseColumn"/>
         from cart_info
         where user_id = #{userId,jdbcType=VARCHAR} and prod_id = #{prodId,jdbcType=VARCHAR}
     </select>
@@ -72,7 +84,41 @@
         </foreach>
    </delete>
 
+    <!--5.更新某个商品的数量-->
+    <update id="updateNumById" parameterType="com.itlong.bean.CartInfo">
+        update cart_info
+        set user_id = #{cartInfo.userId,jdbcType=VARCHAR},
+            prod_id = #{cartInfo.prodId,jdbcType=VARCHAR},
+            price = #{cartInfo.price,jdbcType=DECIMAL},
+            add_time = #{cartInfo.addTime,jdbcType=TIMESTAMP},
+            prod_name = #{cartInfo.prodName,jdbcType=VARCHAR},
+            num=#{cartInfo.num,jdbcType=INTEGER}
+        where cart_id = #{cartInfo.cartId,jdbcType=VARCHAR} and prod_id=#{prodId}
+    </update>
 
+    <resultMap id="CartAndProductMapping" type="CartInfo" extends="BaseResultMap">
+        <association property="productInfo" columnPrefix="prod_"
+                     resultMap="com.itlong.mapper.ProductInfoMapper.BaseResultMap" >
+        </association>
+    </resultMap>
 
+    <select id="selectCartInfoByUserId" resultMap="CartAndProductMapping">
+        select
+        cart_id, user_id, ci.prod_id,  ci.price, add_time, ci.prod_name,num
+        ,pi.prod_id  prod_prod_id,
+        pi.prod_name   prod_prod_name,
+        pi.price  prod_price,
+        pi.`describe` prod_describe,
+        pi.prod_date prod_prod_date,
+        pi.Prod_detail prod_Prod_detail,
+        pi.prod_pic prod_prod_pic
+        from cart_info ci,product_info pi
+        where ci.prod_id=pi.prod_id
+        and ci.user_id=#{userId}
+        and  ci.prod_id
+        <foreach collection="prodIds" item="prodId" separator="," open="in(" close=")">
+            #{prodId}
+        </foreach>
+    </select>
 
 </mapper>

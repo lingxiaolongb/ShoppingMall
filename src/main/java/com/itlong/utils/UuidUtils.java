@@ -14,13 +14,13 @@ public class UuidUtils {
      */
     public static final int len = 16;
 
-    public  static String getCartUUid(){
+    public  static  String getCartUUid(){
         String uuid=UUID.randomUUID().toString().replaceAll("-","");
         int start=(int)Math.floor(Math.random()*17);
        return  uuid.substring(start, UuidUtils.len+start);
     }
 
-    public  static String getOrderUUid(){
+    public  static  String getOrderUUid(){
         return UUID.randomUUID().toString().replaceAll("-","");
     }
 

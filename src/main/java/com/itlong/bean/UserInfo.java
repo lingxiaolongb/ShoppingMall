@@ -10,6 +10,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserInfo implements Serializable {
+    private static final long serialVersionUID = -2087395963493504728L;
+
     private String userId;
 
     private String memberName;

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
-@Component("settlementController")
+//@Component("settlementController")
 public class SettlementController implements HandlerInterceptor {
 
     @Override

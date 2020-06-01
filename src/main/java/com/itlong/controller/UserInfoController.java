@@ -1,18 +1,19 @@
 package com.itlong.controller;
 
 import com.itlong.bean.*;
+import com.itlong.dto.OrderItem;
 import com.itlong.service.*;
+import com.itlong.utils.UnionKeyUtils;
 import com.itlong.utils.UuidUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/my_jindong")
@@ -38,6 +39,18 @@ public class UserInfoController {
         UserInfo userInfo = userInfoService.selectByPrimaryKey(userId);
         model.addAttribute("userInfo",userInfo);
         return "user/user-info";
+    }
+
+    @GetMapping("/hello")
+    public String hello(Model model){
+        return "user/user-hello";
+    }
+
+    @GetMapping ("/hello2")
+    public String hello2(Model model){
+        model.addAttribute("hello","hello");
+        System.out.println("跳转中。。。。。。。。。。。。");
+        return "user/hello2";
     }
 
     @GetMapping("/balance/{userId}")
@@ -74,9 +87,9 @@ public class UserInfoController {
     @GetMapping("/order/{userId}")
     public String userOrder(@PathVariable String userId,Model model){
             List<OrderInfo> orderInfos = orderInfoService.selectOrderInfoByUgdId(userId);//已做缓存
-             model.addAttribute("orderInfos",orderInfos);
+            Map<String, OrderItem> orderItems = UnionKeyUtils.mapCastListByOrderInfo(orderInfos);
+          model.addAttribute("orderItems",orderItems);
          return "user/user-order";
-
     }
 
 

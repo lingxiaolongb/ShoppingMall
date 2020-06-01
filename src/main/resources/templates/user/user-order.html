@@ -45,7 +45,8 @@
             </ul>
         </div>
         <div class="order_con">
-            <div class="item" th:each="order:${orderInfos}" th:id="${order.orderId}">
+            <form id="order-pay" method="post">
+            <div class="item" th:each="orderItem:${orderItems}" th:id="${orderItem.key}">
                 <table class="bought_table">
                     <col width="32%">
                     <col width="8%">
@@ -56,38 +57,42 @@
                     <thead class="info">
                     <td colspan="2">
                         <input type="checkbox" />
-                        <label th:text="${#dates.format(order.purchaseTime, 'yyyy-MM-dd')}"></label>
-                        <span th:text="'订单号:'+${order.orderId}"></span>
+                        <label th:text="${#dates.format(orderItem.value.purchaseTime,'yyyy-MM-dd')}"></label>
+                        <span th:text="'订单号:'+${orderItem.key}"></span>
                     </td>
                     <td colspan="1"><a class="seller" href="javascript:void(0)" title="恒乐康大药房旗舰店">恒乐康大药房旗舰店</a></td>
                     <td colspan="3" align="right"><a class="glyphicon glyphicon-trash pos">删除</a></td>
                     </thead>
                     <tbody>
-                    <tr class="bought_tr" >
+
+                    <tr class="bought_tr" th:each="productInfo,iterstat:${orderItem.value.productInfos} "  >
                         <td>
                             <div class="con">
                                 <a class="pic" href="javascript:void(0)">
-                                    <img th:src="@{'/site/img/'+${order.productInfo.prodPic}}" />
+                                    <img th:src="@{'/site/img/'+${productInfo.key.prodPic}}" />
                                 </a>
                                 <div class="jieshao">
-                                    <a class="introduction" th:text="${order.productInfo.describe}" th:title="${order.productInfo.describe}">
+                                    <a class="introduction" th:text="${productInfo.key.describe}" th:title="${productInfo.key.describe}">
                                     </a>
                                 </div>
                             </div>
                         </td>
-                        <td align="right" th:text="'￥ '+${order.productInfo.price}"></td>
-                        <td align="center" th:text="${order.quantity}"></td>
-                        <td align="left" th:text="${'￥ '+order.totalPrice}"></td>
-                        <td>交易成功</td>
-                        <td><a class="again">再次购买</a></td>
+                        <td align="right" th:text="'￥ '+${productInfo.key.price}"></td>
+                        <td align="center" th:text="${productInfo.value}"></td>
+                        <td th:text="${iterstat.first?'￥ '+orderItem.value.totalPrice:''}"  ></td>
+                        <td th:if="${iterstat.first}" >
+                            <button class="payment-order btn btn-success" th:if="${orderItem.value.orderStatus==0}">支付订单</button>
+                            <span th:if="${orderItem.value.orderStatus==1}">订单待收货中。。。</span>
+                        </td>
+                        <td align="center"><a class="again" th:if="${iterstat.first}">再次购买</a></td>
                     </tr>
                     </tbody>
-
                 </table>
+
             </div>
 
 
-
+            </form>
         </div>
 
 

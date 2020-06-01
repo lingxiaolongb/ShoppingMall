@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>支付环节</title>
+
+    <link href="/user/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/user/css/datepicker3.css" rel="stylesheet" type="text/css">
+    <link href="/user/css/styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css" />
+    <style>
+        .layui-form-label{
+            width: 200px!important;
+        }
+        .layui-input-block {
+            margin-left: 50px!important;
+            min-height: 36px!important;
+        }
+    </style>
+
+</head>
+
+<body>
+<div th:replace="common/user-head::head"></div>
+<div th:replace="common/user-left::left(item='cart')"></div>
+
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div style="height: 50px;"></div>
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+            <li class="active">我的购物车</li>
+        </ol>
+    </div>
+    <!-- 上面那个浮动漏了-->
+    <form class="layui-form">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单号:</label>
+            <div class="layui-input-block ">
+                <label th:id="${session.orderId}" class="layui-form-label orderId" th:text="${session.orderId}"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">支付金额:</label>
+            <div class="layui-input-block ">
+                <label class="layui-form-label" th:text="${'￥ '+session.totalPrice+' 人民币'}"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">支付密码:</label>
+            <div class="layui-input-inline">
+                <input  name="pay-password" type="password" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="btn btn-info" type="button" id="pay">确认支付</button>
+        </div>
+    </form>
+    <!-- ---------- 分割线---------- -->
+    <div style="clear: both;"></div>
+
+</div>
+
+<script src="/common/js/jquery-3.3.1.min.js"></script>
+<script src="/user/js/bootstrap.min.js"></script>
+<script src="/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+    layui.use(['element', 'form'], function() {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        var form = layui.form;
+        //监听导航点击
+        element.on('nav(demo)', function(elem) {
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+<script src="/user/js/pay.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    ! function($) {
+        $(document).on("click", "ul.nav li.parent > a > span.icon", function() {
+            $(this).find('em:first').toggleClass("glyphicon-minus");
+        });
+        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+    }(window.jQuery);
+
+    $(window).on('resize', function() {
+        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+    });
+    $(window).on('resize', function() {
+        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+    })
+</script>
+
+</body>
+
+</html>

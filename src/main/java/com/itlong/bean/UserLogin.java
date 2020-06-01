@@ -8,6 +8,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserLogin  implements Serializable {
+    private static final long serialVersionUID = -8614757902566123610L;
+
     private String username;
 
     private String password;

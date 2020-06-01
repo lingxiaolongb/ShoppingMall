@@ -36,24 +36,30 @@ $(function(){
 			}
 		}
         $(".selected").prop("checked",true);
-		
+
 	
 	
 		
 	});
 		/**
-		 * 减少一个商品数量
+		 * 加上一个商品数量
 		 */
 	
 	$(".operi").on("click",function(){
 		
 		var $num=$(this).prev();//获取上个邻节点
 		var len =parseInt($num.val())+1;
+        var prodId=$(this).parents(".item").attr("id");
 		if(len>10) {	
 			len=10;
 			$(this).next().text("至多购买10件").show();
 		}else{
 			$(this).next().hide();
+            $.ajax({
+                url:"/cart/add",
+                type: "post",
+                data:{"prodId":prodId}
+            });
 		}
 		$num.val(len);
 		countItemSum($(this),len);
@@ -65,19 +71,28 @@ $(function(){
 	});
 	
 	/**
-	 * 增加一个商品数量
+	 * 减去一个商品数量
 	 */
 	$(".operd").on("click",function(){
 		
 		var $num=$(this).next();//获取下个邻节点
 		var len =parseInt($num.val())-1;
+        var prodId=$(this).parents(".item").attr("id");
 		if(len<1) {
 			len=1;
 			$num.next().next().text("至少购买1件").show();	
 		}else{
 			$num.next().next().hide();
+            $.ajax({
+                url:"/cart/add",
+                data:{"type":"sub","prodId":prodId},
+                type: "post"
+            });
 		}
 		$num.val(len);
+
+
+
 		countItemSum($(this),len);
 		if(!checkSelected($(this))){
 			return ;
@@ -246,25 +261,22 @@ function toDecimal2(x){
 	return s;
 }
 
-
+//添加未支付订单,默认5分钟
 $("#buy").click(function () {
     var a= countSelectedItme();
     if(a==0) return;
-    var shopInfos=[];
-    var n=1;
+    var prodIds=[];
+
     var price=0;
-    var temp;
+
     for(let i=0;i<a.length;i++){
-        n=$(`#${a[i]}`).find('.num').val();
-        price=$(`#${a[i]}`).find('.real').text();
-        temp={"prodId":a[i],"num":n,"price":price};
-        shopInfos.push(temp);
+        prodIds.push(a[i]);
     }
     $.ajax({
         url:"/cart/add_product_temporarily",
         method: "post",
         contentType:"application/json",
-        data:JSON.stringify(shopInfos),
+        data:JSON.stringify(prodIds),
         success:function () {
             window.location.href="http://localhost:8080/cart/Payment_order"
         },error:function () {

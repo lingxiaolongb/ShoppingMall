@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartInfo  implements Serializable {
+    private static final long serialVersionUID = -2548118400589372633L;
     private String cartId;
 
     private String userId;
@@ -20,19 +21,29 @@ public class CartInfo  implements Serializable {
 
     private BigDecimal price;
 
+    private Integer num;
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime addTime;
 
     private String prodName;
 
-    private List<ProductInfo> productInfos;
+    private ProductInfo productInfo;
 
-    public List<ProductInfo> getProductInfos() {
-        return productInfos;
+    public ProductInfo getProductInfo() {
+        return productInfo;
     }
 
-    public void setProductInfos(List<ProductInfo> productInfos) {
-        this.productInfos = productInfos;
+    public void setProductInfo(ProductInfo productInfo) {
+        this.productInfo = productInfo;
     }
 
     public String getCartId() {
@@ -83,6 +94,7 @@ public class CartInfo  implements Serializable {
         this.prodName = prodName == null ? null : prodName.trim();
     }
 
+
     @Override
     public String toString() {
         return "CartInfo{" +
@@ -90,9 +102,10 @@ public class CartInfo  implements Serializable {
                 ", userId='" + userId + '\'' +
                 ", prodId='" + prodId + '\'' +
                 ", price=" + price +
+                ", num=" + num +
                 ", addTime=" + addTime +
                 ", prodName='" + prodName + '\'' +
-                ", productInfos=" + productInfos +
+                ", productInfo=" + productInfo +
                 '}';
     }
 }

@@ -18,6 +18,8 @@ public interface CartInfoMapper {
 
     int updateByPrimaryKey(CartInfo record);
 
+     int updateNumById(@Param("cartInfo")CartInfo cartInfo,@Param("prodId") String prodId);
+
     int selectRow();
 
     List<CartInfo> selectByUserId(String userId);
@@ -25,4 +27,6 @@ public interface CartInfoMapper {
     CartInfo selectProdDuplicate(String userId,String prodId);
 
     int deleteItemByProdId(@Param("userId") String userId,@Param("prodIds") List<String> prodIds);
+
+    List<CartInfo> selectCartInfoByUserId(@Param("userId") String userId,@Param("prodIds") List<String> prodIds);
 }

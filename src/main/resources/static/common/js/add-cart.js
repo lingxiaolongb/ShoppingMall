@@ -2,7 +2,7 @@ $(".addProdToCart").on('click',function () {
   var prodId=  $(this).attr('prodId');
     $.ajax({
         url:'/cart/add',
-        method:'POST',
+        type:'post',
         data:{
           "prodId":prodId
         },

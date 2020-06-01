@@ -10,6 +10,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductInfo  implements Serializable {
+
+    private static final long serialVersionUID = -5895867451353750742L;
     private String prodId;
 
     private String prodName;
@@ -102,5 +104,19 @@ public class ProductInfo  implements Serializable {
                 ", integral=" + integral +
                 ", prodDetail='" + prodDetail + '\'' +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return prodId.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this==obj) return  true;
+        if(obj==null) return  false;
+        if(getClass()!=obj.getClass()) return false;
+        ProductInfo pi = (ProductInfo) obj;
+        return this.prodId.equals(pi.getProdId());
     }
 }

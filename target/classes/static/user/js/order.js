@@ -14,3 +14,9 @@ $(".pos").on('click', function() {
 	});
 
 });
+
+$(".payment-order").click(function () {
+    var orderId = $(this).parents(".item").attr("id");
+    $("#order-pay").attr("action",'/cart/payMoney/'+orderId);
+    $("#order-pay").submit();
+});

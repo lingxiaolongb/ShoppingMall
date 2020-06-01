@@ -7,7 +7,10 @@ import com.itlong.service.ILoggerService;
 import com.itlong.utils.UuidUtils;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 import javax.sound.midi.Soundbank;
 import java.math.BigDecimal;
@@ -23,20 +26,10 @@ import java.util.concurrent.Executors;
 
 public class Test {
 
-    static LinkedList<String>  list=new LinkedList<>();
-    public static void main(String[] args) throws ParseException {
+    JdbcTemplate jdbcTemplate=null;
 
-        list.add("111");
-
-//        ExecutorService executorService = Executors.newFixedThreadPool(20);
-//        for(int i=0;i<9;i++){
-//           executorService.execute(()->{
-//               list.add(Thread.currentThread().getName());
-//
-//           });
-//        }
-//        executorService.shutdown();
-//        System.out.println(list.toString());
-//    }
+    public static void main(String[] args) {
+        JdbcTemplate jdbcTemplate=new JdbcTemplate();
     }
+
 }

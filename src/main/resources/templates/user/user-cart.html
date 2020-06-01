@@ -57,7 +57,7 @@
                 </div>
                 <div class="right">
                     <div class="price">¥&nbsp;<span class="real" th:text="${prodInfos[iterStat.index].price}"></span></div>
-                    <div class="number"><a class="oper operd">-</a><input class="num" value="1" autocomplete="off" type="text" name="num"><a class="oper operi">+</a>
+                    <div class="number"><a class="oper operd">-</a><input class="num" th:value="${cartInfo.num}" autocomplete="off" type="text" name="num"><a class="oper operi">+</a>
                         <p class="tip"></p>
                     </div>
                     <div class="all_price"  th:text="${'¥ '+prodInfos[iterStat.index].price}"></div>

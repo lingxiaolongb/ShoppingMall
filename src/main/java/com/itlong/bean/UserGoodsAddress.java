@@ -8,6 +8,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserGoodsAddress  implements Serializable {
+
+    private static final long serialVersionUID = 3137464972333870781L;
     private String ugdId;
 
     private String consignee;

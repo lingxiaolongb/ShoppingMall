@@ -1,7 +1,6 @@
 package com.itlong.service;
 
 import com.itlong.bean.CartInfo;
-import com.itlong.bean.UserInfo;
 
 import java.util.List;
 
@@ -13,7 +12,12 @@ public interface CartInfoService {
 
     List<CartInfo> selectByUserId(String userId);
 
+    int updateNumById(CartInfo cartInfo, String prodId);
+
     CartInfo selectProdDuplicate(String userId,String prodId);
 
     int deleteItemByProdId(String userId,List<String> prodIds);
+
+
+    List<CartInfo> selectCartInfoByUserId(String userId, List<String> prodIds);
 }

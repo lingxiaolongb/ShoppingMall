@@ -29,9 +29,14 @@ public class CartInfoServiceImpl implements CartInfoService {
     ProductInfoMapper productInfoMapper;
 
     @Override
-    @Cacheable(value = Cache.CART_INFO,key = "#userId")
+   // @Cacheable(value = Cache.CART_INFO,key = "#userId")
     public List<CartInfo> selectByUserId(String userId) {
         return cartInfoMapper.selectByUserId(userId);
+    }
+
+    @Override
+    public int updateNumById(CartInfo cartInfo, String prodId) {
+        return cartInfoMapper.updateNumById(cartInfo,prodId);
     }
 
     @Override
@@ -42,6 +47,7 @@ public class CartInfoServiceImpl implements CartInfoService {
         cartInfo.setCartId(UuidUtils.getCartUUid());
         cartInfo.setPrice(productInfo.getPrice());
         cartInfo.setProdId(prodId);
+        cartInfo.setNum(1);
         cartInfo.setProdName(productInfo.getProdName());
         cartInfo.setUserId(userId);
         cartInfo.setAddTime(LocalDateTime.now());
@@ -56,14 +62,20 @@ public class CartInfoServiceImpl implements CartInfoService {
  //没有update,delete
 
     @Override
-    @Cacheable(value = Cache.CART_INFO,key = "#userId+':'+#prodId")
+//    @Cacheable(value = Cache.CART_INFO,key = "#userId+':'+#prodId")
     public CartInfo selectProdDuplicate(String userId, String prodId) {
         return cartInfoMapper.selectProdDuplicate(userId,prodId);
+
     }
 
     @Override
     @CacheEvict(value = Cache.CART_INFO,allEntries = true,beforeInvocation = true)
     public int deleteItemByProdId(String userId, List<String> prodIds) {
         return cartInfoMapper.deleteItemByProdId(userId,prodIds);
+    }
+
+    @Override
+    public List<CartInfo> selectCartInfoByUserId(String userId, List<String> prodIds) {
+        return cartInfoMapper.selectCartInfoByUserId(userId,prodIds);
     }
 }

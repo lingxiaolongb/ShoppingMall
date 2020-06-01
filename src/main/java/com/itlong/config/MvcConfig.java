@@ -6,14 +6,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
+//@Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-    @Autowired
-    SettlementController settlementController;
+//    @Autowired
+//    SettlementController settlementController;
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(settlementController).addPathPatterns("/cart/Payment_order");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(settlementController).addPathPatterns("/cart/Payment_order");
+//    }
 }
