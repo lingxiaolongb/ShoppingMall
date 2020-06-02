@@ -1,4 +1,4 @@
-# 小型购物商城
+# 小型购物系统
 ### 小型购物商城,主要实现了后台信息用户的管理客户
 
 ## 采用SpringBoot+thymeleaf+MyBatis+shiro+Redis缓存+RabbitMQ+layUI 技术实现
